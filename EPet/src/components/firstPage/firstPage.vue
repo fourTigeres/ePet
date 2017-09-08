@@ -3,7 +3,7 @@
   <div id="firstPage" ref="firstPage">
       <div class="content" ref="content">
         <!--轮播组件-->
-        <turnShow></turnShow>
+        <turnShow :imgArr="imgArr"></turnShow>
         <div class="plan">
           <div class="oneBuy">
             <a href="">
@@ -185,9 +185,14 @@
   import ratings from '../ratings/ratings.vue'
 
   export default {
-    props: {},
+    props: {
+      indexdata: Object
+
+    },
     data(){
-      return { }
+      return {
+        imgArr:{}
+      }
     },
 
     components: {
@@ -200,23 +205,36 @@
       'ratings': ratings
     },
     created () {
-//      setTimeout(()=>{
-//        if (!this.scroll) { // 如果不存在才创建, 并保存,保证总共只创建一次
-//          this.scroll = new BScroll(this.$refs.firstPage, {
-//            click: true,
-//            scrollX:true
-//          });
-//          console.log(this.$refs.firstPage)
-//        } else {
-//          setTimeout(()=>{
-//            this.scroll.refresh()    //滚动之后要即时更新到最新位置，否则会回到滚动之前的位置
-//          },20)
-//        }
-//      },20)
+      setTimeout(()=>{
+        if(this.indexdata.datas[0]) {
+          this.imgArr=this.indexdata.datas[0]
+          console.log(this.imgArr)
+        }
+      },2)
 
     },
     methods: {
+      _initScroll () {
+        this.firstScroll = new BScroll(this.$refs.firstPage, {
+          click: true
+        })
+      }
     },
+    computed:{
+//      images(){
+//          const imgArr=[]
+//          if(this.indexdata.datas[0]){
+//            this.indexdata.datas[0].value.forEach((item,index)=>{
+//              imgArr.push(item.image)
+//            })
+//            console.log(imgArr)
+
+//          }
+
+
+
+//      }
+    }
   }
 </script>
 

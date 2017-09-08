@@ -2,12 +2,9 @@
   <div id="turnShow">
     <div>
       <mt-swipe :auto="1000" class="swiperWrapper">
-        <mt-swipe-item class="swipeItem"><router-link to="/firstPage"><img src="./1.jpg" alt=""></router-link></mt-swipe-item>
-        <mt-swipe-item class="swipeItem"><router-link to="/firstPage"><img src="./2.jpg" alt=""></router-link></mt-swipe-item>
-        <mt-swipe-item class="swipeItem"><router-link to="/firstPage"><img src="./3.jpg" alt=""></router-link></mt-swipe-item>
-        <mt-swipe-item class="swipeItem"><router-link to="/firstPage"><img src="./4.jpg" alt=""></router-link></mt-swipe-item>
-        <mt-swipe-item class="swipeItem"><router-link to="/firstPage"><img src="./5.jpg" alt=""></router-link></mt-swipe-item>
-        <mt-swipe-item class="swipeItem"><router-link to="/firstPage"><img src="./6.jpg" alt=""></router-link></mt-swipe-item>
+        <mt-swipe-item class="swipeItem" v-if="imgArr.value" v-for="item in imgArr.value">
+          <router-link to="/firstPage"><img :src="`${item.image}`" alt=""></router-link>
+        </mt-swipe-item>
       </mt-swipe>
     </div>
 
@@ -17,7 +14,9 @@
 <script>
   export default {
 
-    props: {},
+    props: {
+      imgArr: Object
+    },
     data () {
       return {}
     },

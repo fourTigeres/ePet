@@ -7,7 +7,10 @@ import  './common/stylus/index.styl'
 import MintUI from 'mint-ui'
 import { Swipe, SwipeItem, Button} from 'mint-ui';
 import 'mint-ui/lib/style.css'
+import '../static/css/reset.css'
 import BScroll from 'better-scroll'
+
+
 // Vue.use(MintUI)
 
 // Vue.filter("time-string",(value) => {

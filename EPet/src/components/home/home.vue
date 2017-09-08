@@ -10,12 +10,12 @@
             <a class="animate" href="">
               <span class="catordog c89">猫猫站</span>
             </a>|
-          <a class="adress" href="">
-            <span class="myposition c89 ft13">重庆</span>
-            <span >
-            <img class="sanjiao" src="./daosnajiao.png" alt="">
-          </span>
-          </a>
+            <a class="adress" href="">
+              <span class="myposition c89 ft13">重庆</span>
+              <span >
+                <img class="sanjiao" src="./daosnajiao.png" alt="">
+              </span>
+            </a>
           </div>
           <div class="searchPet">
             <a href="https://wap.epet.com/search.html?pet_type=cat&amp;fw=0">
@@ -30,48 +30,29 @@
           </div>
         </div>
         <div class="findNav">
-          <ul>
-            <li class="">
-              <router-link to="firstPage">
-                <span>首页</span>
+          <ul ref="scrollWrapper">
+            <li  v-if="indexdata.menus" v-for="(item,index) in indexdata.menus">
+              <router-link :to="`${titleArr[index]}`" >
+                <!--用以下两种拼串方式都可以-->
+                <!-- :to="`${titleArr[index]}`"  -->
+                <!--   :to="''+titleArr[index]"  -->
+                <span>{{item.menu_name}}</span>
+                <!--{{item.menu_name}}-->
                 <div></div>
-              </router-link>
-            </li>
-            <li>
-              <router-link to="catfood">
-                <span>猫粮</span>
-              </router-link>
-            </li>
-            <li>
-              <router-link to="special">
-                <span>特卖</span>
-              </router-link>
-            </li>
-            <li>
-              <router-link to="can">
-                <span>罐头超市</span>
-              </router-link>
-            </li>
-            <li>
-              <router-link to="chaopinVideo">
-                <span>潮品视频</span>
-              </router-link>
-            </li>
-            <li>
-              <router-link to="classroom">
-                <span>新喵课堂</span>
               </router-link>
             </li>
           </ul>
         </div>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view :indexdata="indexdata"></router-view>
   </div>
 
 </template>
 
 <script>
+  import BScroll from 'better-scroll'
+  import axios from 'axios'
   import firstPage from '../firstPage/firstPage.vue'
   import catfood from '../catfood/catfood.vue'
   import special from '../special/special.vue'
@@ -82,12 +63,31 @@
 
 
   export default {
-    props: {},
-    data () {
-      return { }
+    props: {
+      indexdata:Object
     },
-    methods: {},
-    computed: {},
+    data () {
+      return {
+        titleArr:["firstPage","catfood","special","can","chaopinVideo","classroom"]
+      }
+    },
+    created () {
+
+    },
+    methods: {
+      _initScroll () {
+        this.homeScroll = new BScroll(this.$refs.scrollWrapper, {
+          click: true,
+          scrollX:true
+        })
+      }
+
+    },
+    computed: {
+      menus(){
+        return this.indexdata.menus||{}
+      }
+    },
     components:{
       'firstPage': firstPage,
       'catfood': catfood,
@@ -174,7 +174,7 @@
 
         .findNav
           .active
-            footer-run(pink)
+            footer-run(deeppink)
           ul
             overflow hidden
             width (447/r)

@@ -38,6 +38,10 @@ build目录中放打包后的文件，config中放配置文件。
 "server": "json-server src/mock/data.json -p 8082",
 可以自定义端口号。
 运行模拟服务器：npm run server
+当出现 以下代码时表示服务器已经开启，在浏览器地址栏输入http://localhost:8082，就可以看到返回的数据；
+  http://localhost:8082
+  Type s + enter at any time to create a snapshot of the database
+
 
 
 关于VUE：
@@ -180,10 +184,33 @@ config/index.js里面改端口号
 
 
 
+字符串与变量拼串：
+字符串与变量拼串用以下两种拼串方式都可以，" "里面的东西根据js语法得到的是什么就是什么，""只是一层包裹，如果 里面是变化的值，外面的属性前面就要用 ：
+如:用以下两种拼串方式都可以
+ :to="`${titleArr[index]}`" 
+ :to=" ''+titleArr[index]"  
 
 
 
 
+解决列表的 小圆点默认样式有时不生效：在main.js中引入默认reset.css
+
+
+子组件将从上一级组件中接收到的数据经过处理后得到的新数据，作为计算属性使用，
+
+
+只有data与created是函数，其他都是对象，computed对象里面的属性的值都是函数，属性名作为计算属性。
+
+
+当数据值获取到后才渲染组件，防止出现undefined报错:
+ <li  v-if="indexdata.menus" v-for="(item,index) in indexdata.menus"><li>
+v-if后面的值必须有两层，否则当第一层为undefined的时候，无反渲染组件。
+
+
+使用计算属性还是在created中将数据处理后返回？异步何时该使用？即渲染顺序与数据传输的顺序
+
+
+子组件本身的数据，放在data中，外组件传进来的数据，用计算属性或props
 
 
 

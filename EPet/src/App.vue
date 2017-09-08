@@ -22,17 +22,48 @@
           </router-link>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view :indexdata="indexpage"></router-view>
     <rightSide></rightSide>
   </div>
 </template>
 
 <script>
+  import axios from 'axios'
   import rightSide from './components/rightSide/rightSide.vue'
-export default {
+  export default {
     name: 'app',
     components: {
       'rightSide': rightSide
+    },
+    data () {
+      return {
+        indexpage: { }
+      }
+    },
+    created () {
+      const titleArr = ['firstPage', 'catfood', 'special', 'can', 'chaopinVideo', 'classroom']
+      const url = 'http://localhost:8082/db'
+      axios.get(url)
+        .then((res) => {
+          this.indexpage = res.data.indexpage
+//          setTimeout(()=>{
+//            this.indexpage.menus.forEach((item,index)=>{
+//              item.componentTitle = titleArr[index]
+//            })
+//          },2)
+        })
+    },
+    computed: {
+//      indexdata(){
+//        setTimeout(()=>{
+//          this.indexpage.menus.forEach((item,index)=>{
+//            item.componentTitle = titleArr[index]
+//            return this.indexpage
+//          })
+//        },10)
+//      }
+    },
+    methods: {
     }
 }
 </script>
