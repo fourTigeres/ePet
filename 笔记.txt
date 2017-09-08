@@ -1,0 +1,191 @@
+接受git组织邀请：
+进入 https://github.com/组织名  点击view invitation就可以看到邀请。 
+
+
+创建脚手架 
+?npm install -g vue-cli : 全局下载
+?vue init webpack xxx:下载基于webpack模板项目
+?cd xxx   在xxx目录下运行以下命令
+?npm install : 下载项目依赖的所有模块
+?npm run dev ：服务器中运行项目
+
+
+static目录中放入静态文件，如：字体库font，样式库css，外部js库js等；
+src目录中放components组件目录，images图片目录，mock数据目录等目录，main.js主文件，App主组件。
+build目录中放打包后的文件，config中放配置文件。
+其他根目录文件如index.html是入口。
+
+样式使用stylus插件。
+全局安装： ?npm install stylus stylus-loader --save-dev 
+使用：
+<style lang="stylus" rel="stylesheet/stylus">      //引入stylus样式的固定写法
+  
+@import "./common/stylus/mixin.styl"               //导入外部样式
+</style>
+
+
+
+
+
+
+
+
+
+数据使用json-server:
+安装：npm install --save-dev json-server
+放置数据文件：mock目录下，data目录中放入模拟好的数据.json文件，可以放置多个。
+配置命令：package.json文件中，scripts:下加一行
+"server": "json-server src/mock/data.json -p 8082",
+可以自定义端口号。
+运行模拟服务器：npm run server
+
+
+关于VUE：
+将router-view 当做是一个容器，它渲染的组件是你使用 vue-router 指定的，路由匹配到哪一个组件，就会在此容器区显示哪 一个组件。       
+
+render:h => h(app),  将h作为createElement的别名是一个通用惯例，本质是：
+render: function (createElement) {
+  return createElement(
+      'h' + this.level,   // tag name 标签名称
+      this.$slots.default // 子组件中的阵列
+    )
+}
+
+Vue  1.x下应该使用：
+new Vue({
+    el: '#app',
+    components: { App }
+});
+
+
+
+
+自定义字体：
+自造字体工具：fontLab
+icoMoon字体库的使用：
+进入icomoonApp--->选中想要的字体---->create生成，命名---->download字体包---》解压---》只留style.css和fonts包---》根据style.css中各字体的不同样式
+
+
+rem适配的混合：
+在stylus混合中写一个 r = 375rem/32，375是IPHONE6的像素宽，将混合引入到stylus样式中，
+然后在样式中  width (150/r)  ，必须加（）,就能实现适配。
+
+
+在组件的script的直接层中，可以使用正常的js代码，并且可以运行。
+
+图片容器上下有1px边框，使用font-size =0 即可以解决。
+
+引用图片时，必须要在地址里加上   ./  ，否则图片不显示。
+
+
+文字溢出省略号
+
+单行文本
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
+
+多行文本
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 3;
+overflow: hidden;
+
+-webkit-line-clamp用来限制在一个块元素显示的文本的行数。 为了实现该效果，它需要组合其他的WebKit属性。常见结合属性：
+display: -webkit-box; 必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。
+-webkit-box-orient 必须结合的属性 ，设置或检索伸缩盒对象的子元素的排列方式 。
+
+将height设置为line-height的整数倍，防止超出的文字露出。
+给p::after添加渐变背景可避免文字只显示一半。
+由于ie6-7不显示content内容，所以要添加标签兼容ie6-7（如：<span>…<span/>）；兼容ie8需要将::after替换成:after。
+
+min-ui的使用
+
+1 安装  npm install mint-ui -save 或简写   npm imint-ui -s
+2 在入口文件main.js中引入  import Mint from 'mint-ui'; 
+3 在入口文件main.js中使用  Vue.use(Mint);
+4 必须使用mint-ui 的样式，安装 style-loader 和css-loader，配置webpack..base.config.js
+
+
+npm install style-loader --save-dev   安装和以下配置一起使用
+
+{
+test: /\.css$/,
+use: [
+{ loader: "style-loader" },
+{ loader: "css-loader" },
+],
+}
+
+引入并使用全部组件import Mint from 'mint-ui';  使用 Vue.use(Mint);
+按需引入和使用子组件 
+import { Cell, Checklist } from 'minu-ui';
+Vue.component(Cell.name, Cell);
+Vue.component(Checklist.name, Checklist);
+
+使用全部样式：import 'mint-ui/lib/button/style.css';
+按需使用样式，在 .babelrc 中配置如下：
+{
+  "plugins": [, ["component", [
+    { "libraryName": "mint-ui", "style": true }
+  ]]]
+}
+
+
+
+
+
+
+4  虽然是全局使用，但是在使用的过程中还是要在组件内引用一下你需要使用的组件,并且映射为组件 ，在暴露里面用以下语句：
+
+components: {
+      'mt-swipe': Swipe,   //等于Vue.component(Swipe.name, Swipe);
+
+      'mt-swipe-item': SwipeItem   //等于Vue.component(SwipeItem.name, SwipeItem);
+    },
+
+
+berrer-scroll的使用：
+安装：npm install better-scroll --save
+
+使用ref得到dom元素，
+
+
+
+使用swiper
+导航横向滑动自动贴边 33
+  05 
+轮播  21
+纵向滑动  34下
+
+侧边小猫CSS3D动画：
+图片与外容器高度相等，图片容器与图片大小相同，让图片容器在外容器内发生translateX位移，同时将外容器的overflow设为hidden即可。
+或者让图片div的背景设为图片，变动背景位置一样可以实现
+发生动画的DOM选择器必须与动画关键帧选择器在同一级，
+
+animation  2s catMove  steps(2) infinite
+
+@keyframes catMove
+      0%
+        transform translateX(0)
+      100%
+        transform translateX(-100%)
+
+
+
+
+
+
+config/index.js里面改端口号
+
+
+
+
+
+
+
+
+
+
+
+
