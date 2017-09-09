@@ -12,7 +12,7 @@
         {
             "title": "猫咪日用",
             "rigth_img": {
-                "image": "https://static.epetbar.com/static_wap/appmall/lib/goods/cate_right_img.png",
+                "photo": "https://static.epetbar.com/static_wap/appmall/lib/goods/cate_right_img.png",
                 "target": {
                     "mode": "goods_list",
                     "param": "cateid:936"
@@ -57,7 +57,7 @@
         {
             "title": "热门品牌",
             "rigth_img": {
-                "image": "",
+                "photo": "",
                 "img_size": "",
                 "target": {}
             },
@@ -65,7 +65,7 @@
             "flag_icon": "",
             "list": [
                 {
-                    "logo": "https://img2.epetbar.com/nowater/brand_logo/2016-08/12/16/d97b77ca35be62ab745d4bfdd77c9a28.jpg",
+                    "photo": "https://img2.epetbar.com/nowater/brand_logo/2016-08/12/16/d97b77ca35be62ab745d4bfdd77c9a28.jpg",
                     "name": "铁锤",
                     "recommend": 0,
                     "tagongyi": 0,
@@ -75,7 +75,7 @@
                     }
                 },
                 {
-                    "logo": "https://img2.epetbar.com/nowater/brand_logo/2016-11/22/14/664c0589c309818c8858b754c4ee8343.jpg",
+                    "photo": "https://img2.epetbar.com/nowater/brand_logo/2016-11/22/14/664c0589c309818c8858b754c4ee8343.jpg",
                     "name": "Handipod",
                     "recommend": 0,
                     "tagongyi": 0,
@@ -85,7 +85,7 @@
                     }
                 },
                 {
-                    "logo": "https://img2.epetbar.com/nowater/brand_logo/2016-08/12/16/b1ae87a1616bed78e9ae8c885d63afae.jpg",
+                    "photo": "https://img2.epetbar.com/nowater/brand_logo/2016-08/12/16/b1ae87a1616bed78e9ae8c885d63afae.jpg",
                     "name": "斯普威Scoop Away",
                     "recommend": 0,
                     "tagongyi": 0,
@@ -95,7 +95,7 @@
                     }
                 },
                 {
-                    "logo": "https://img2.epetbar.com/nowater/brand_logo/2016-08/12/14/84a5e764173605fd49675ed60b92fe79.jpg",
+                    "photo": "https://img2.epetbar.com/nowater/brand_logo/2016-08/12/14/84a5e764173605fd49675ed60b92fe79.jpg",
                     "name": "派锐",
                     "recommend": 0,
                     "tagongyi": 0,
@@ -105,7 +105,7 @@
                     }
                 },
                 {
-                    "logo": "https://img2.epetbar.com/nowater/brand_logo/2016-08/12/16/4ebb54c1762e888206e39db20a7da4af.jpg",
+                    "photo": "https://img2.epetbar.com/nowater/brand_logo/2016-08/12/16/4ebb54c1762e888206e39db20a7da4af.jpg",
                     "name": "蓝钻Ever Clean",
                     "recommend": 0,
                     "tagongyi": 0,
@@ -115,7 +115,7 @@
                     }
                 },
                 {
-                    "logo": "https://img2.epetbar.com/nowater/brand_logo/2016-08/12/14/4366882ae74444e33dac8565f604928d.jpg",
+                    "photo": "https://img2.epetbar.com/nowater/brand_logo/2016-08/12/14/4366882ae74444e33dac8565f604928d.jpg",
                     "name": "亲宝舒",
                     "recommend": 0,
                     "tagongyi": 0,
@@ -125,7 +125,7 @@
                     }
                 },
                 {
-                    "logo": "https://img2.epetbar.com/nowater/brand_logo/2016-08/12/16/c60942ab078b2a5b1544cffa31bb6cff.jpg",
+                    "photo": "https://img2.epetbar.com/nowater/brand_logo/2016-08/12/16/c60942ab078b2a5b1544cffa31bb6cff.jpg",
                     "name": "光能净",
                     "recommend": 0,
                     "tagongyi": 0,
@@ -135,7 +135,7 @@
                     }
                 },
                 {
-                    "logo": "https://static.epetbar.com/static_wap/appmall/lib/goods/more_brand.png",
+                    "photo": "https://static.epetbar.com/static_wap/appmall/lib/goods/more_brand.png",
                     "name": "",
                     "recommend": 0,
                     "tagongyi": 0,

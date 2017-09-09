@@ -30,8 +30,7 @@ build目录中放打包后的文件，config中放配置文件。
 
 
 
-
-数据使用json-server:
+使用json-server，每次只能开启一个json文件
 安装：npm install --save-dev json-server
 放置数据文件：mock目录下，data目录中放入模拟好的数据.json文件，可以放置多个。
 配置命令：package.json文件中，scripts:下加一行
@@ -41,6 +40,31 @@ build目录中放打包后的文件，config中放配置文件。
 当出现 以下代码时表示服务器已经开启，在浏览器地址栏输入http://localhost:8082，就可以看到返回的数据；
   http://localhost:8082
   Type s + enter at any time to create a snapshot of the database
+
+
+使用mockjs，可以一次开启多个json文件，可以将文件生成到打包文件中
+因为是开发依赖的，所以安装：npm install mockjs --save-dev
+如果要在打包测试中也可以使用，就安装：npm install mockjs --save
+
+配置编辑mock目录下的mockServer.js
+
+import Mock from 'mockjs'   //引入'mockjs'插件
+import data from './data.json'    //引入json数据文件
+import everyData from './everyday.json'
+
+Mock.mock('/api1/data', {code: 0, data: data})    //映射路由返回的res.data就是后面的对象
+Mock.mock('/api2/everyData', {code: 0, data: everyData})
+
+ axios.get('/api2/everyData')  //发请求后会将请求拦截，返回配置对象作为res.data
+
+在main.js中引入mockServer.js文件后，就可以访问其映射的路由,拦截ajax请求后返回的response.data就是得到的数据。
+
+
+props,以及其他的data属性，计算属性，监视属性，都绑定到this身上。
+
+
+
+
 
 
 
@@ -152,7 +176,7 @@ components: {
 berrer-scroll的使用：
 安装：npm install better-scroll --save
 
-使用ref得到dom元素，
+使用ref得到dom元素，作为包裹容器，发生滚动的是第一个子元素，它在滚动方向上的尺寸必须大于容器。
 
 
 
@@ -211,6 +235,59 @@ v-if后面的值必须有两层，否则当第一层为undefined的时候，无反渲染组件。
 
 
 子组件本身的数据，放在data中，外组件传进来的数据，用计算属性或props
+
+
+关于路由
+当你的路由配置使用的是 mode:history 模式的时候，就需要配合后台服务器就行页面配置，不然的话，请求不存在的页面路径就会出错，如果没有服务器的话，你可以暂且配一个通用的路由，也能玩的
+或者最简单的就是不使用history模式，删掉mode:history，使用默认的hash模式。
+
+
+数据传输与渲染速度：
+当数据传输缓慢时，DOM节点可能会显示不出来，加上一个v-if判断，等到数据传输成功时，DOM节点会实时刷新出来。
+
+created里经过处理后得到的新数据只能得到一次，不能实时更新；
+computed里的数据是将数据处理以后得到的新数据，可以实时更新；
+监视属性里面的数据是监视没有经过处理的数据。
+
+基于vue2的倒计时UI组件，
+vue2-countdown，地址：https://cgygd.github.io/vue2-countdown/
+安装：npm install vue2-countdown --save
+
+
+使用哈希改变得到验证码图片
+
+
+
+
+
+
+问题：
+在created里面用延时调用一个方法，
+跟在created里面直接调用methods里的方法，而在methods里使用延时有什么区别？
+
+[BScroll warn]: can not resolve the wrapper dom
+Uncaught TypeError: Cannot read property 'children' of undefined
+
+Uncaught TypeError: Cannot read property 'children' of undefined
+
+Uncaught TypeError: Cannot read property 'style' of undefined
+
+
+v-if   与 v-for  是否应该配合使用？  不仅li,div也可以遍历生成
+
+每个使用v-for遍历的DOM节点，都有一个index属性。可以直接拿来使用，
+如：  <li :class="{selected:selIndex==index}"></li>   selIndex是定义在data中的数据，根据点击时传入当前index值可以更新selIndex。
+
+
+
+
+
+
+
+
+
+
+
 
 
 

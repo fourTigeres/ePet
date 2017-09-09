@@ -37,31 +37,32 @@
     },
     data () {
       return {
-        indexpage: { }
+        indexpage: { },
+        crazyEverydayData:{ }
       }
     },
     created () {
       const titleArr = ['firstPage', 'catfood', 'special', 'can', 'chaopinVideo', 'classroom']
-      const url = 'http://localhost:8082/db'
-      axios.get(url)
+      axios.get('/api1/indexpage')   //获取indexpage数据
         .then((res) => {
-          this.indexpage = res.data.indexpage
-//          setTimeout(()=>{
-//            this.indexpage.menus.forEach((item,index)=>{
-//              item.componentTitle = titleArr[index]
-//            })
-//          },2)
+          this.indexpage = res.data.indexData.indexpage
+        })
+
+
+//            配置文件中：
+//          import data from './data.json'
+//          Mock.mock('/api1/indexpage', {code: 0, indexData: data})
+//          res.data得到的是{code: 0, indexData: data}对象，
+//          res.data.indexData才是得到的json数据
+
+
+      axios.get('/api1/everyData')
+        .then((res) => {
+          this.crazyEverydayData = res.data.everydayData
         })
     },
     computed: {
-//      indexdata(){
-//        setTimeout(()=>{
-//          this.indexpage.menus.forEach((item,index)=>{
-//            item.componentTitle = titleArr[index]
-//            return this.indexpage
-//          })
-//        },10)
-//      }
+
     },
     methods: {
     }
@@ -70,23 +71,25 @@
 
 <style lang="stylus" rel="stylesheet/stylus">   //引入stylus样式的固定写法
 @import "./common/stylus/mixin.styl"    //导入外部样式
-.tab
-  position fixed
-  z-index 10
-  display flex
-  left 0
-  bottom 0
-  width (375/r)
-  height (55/r)
-  &>.tab-item
-    background white
-    flex 1
-    text-align center
-    .active
-      background  rgba(0,0,0,0.4)
-    & > a      //&表示父级
-      display inline-block    //让链接与外层同宽
-      img
-        height (55/r)
+  #app
+    height 100%
+  .tab
+    position fixed
+    z-index 10
+    display flex
+    left 0
+    bottom 0
+    width (375/r)
+    height (55/r)
+    &>.tab-item
+      background white
+      flex 1
+      text-align center
+      .active
+        background  rgba(0,0,0,0.4)
+      & > a      //&表示父级
+        display inline-block    //让链接与外层同宽
+        img
+          height (55/r)
 
 </style>

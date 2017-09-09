@@ -8,12 +8,12 @@
     <div class="onePx"></div>
     <div class="cheapGoods">
       <ul>
-        <li v-for="n in 10">
+        <li  v-if="brandData.brand" v-for="item in brandData.brand[0].list">
           <div class="goodsName">
-            <span>鱼子酱Canine Caviar</span>
+            <span>{{item.name}}</span>
           </div>
           <div class="picture">
-            <a href=""><img src="./cheapGoods.jpg" alt=""></a>
+            <a href=""><img :src="`${item.logo}`" alt=""></a>
           </div>
         </li>
 
@@ -25,7 +25,9 @@
 
 <script>
   export default {
-    props: {},
+    props: {
+      brandData:Object
+    },
     data () {
       return {}
     },

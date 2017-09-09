@@ -1,5 +1,4 @@
 <template>
-  <div>
   <div id="firstPage" ref="firstPage">
       <div class="content" ref="content">
         <!--轮播组件-->
@@ -50,93 +49,15 @@
               <a href="" class="db ftr"></a>
             </div>
           </div>
-          <div class="surpriseList">
+          <div class="surpriseList" ref="surpriseList">
             <ul>
-              <li class="good">
+              <li class="good" v-if="crazyEverydayData.data" v-for="item in crazyEverydayData.data.seven.goods">
                 <div class="image">
-                  <img src="./three_in_one.jpg" alt="">
+                  <img :src="`${item.image.image}`" alt="">
                 </div>
-                <div class="price">￥24.90</div>
-                <div class="cheapPrice">省￥10.10</div>
+                <div class="price">￥{{item.sale_price}}</div>
+                <div class="cheapPrice">{{item.little_price}}</div>
               </li>
-              <li class="good">
-                <div class="image">
-                  <img src="./three_in_one.jpg" alt="">
-                </div>
-                <div class="price">￥24.90</div>
-                <div class="cheapPrice">省￥10.10</div>
-              </li>
-              <li class="good">
-                <div class="image">
-                  <img src="./three_in_one.jpg" alt="">
-                </div>
-                <div class="price">￥24.90</div>
-                <div class="cheapPrice">省￥10.10</div>
-              </li>
-              <li class="good">
-                <div class="image">
-                  <img src="./three_in_one.jpg" alt="">
-                </div>
-                <div class="price">￥24.90</div>
-                <div class="cheapPrice">省￥10.10</div>
-              </li>
-              <li class="good">
-                <div class="image">
-                  <img src="./three_in_one.jpg" alt="">
-                </div>
-                <div class="price">￥24.90</div>
-                <div class="cheapPrice">省￥10.10</div>
-              </li>
-              <li class="good">
-                <div class="image">
-                  <img src="./three_in_one.jpg" alt="">
-                </div>
-                <div class="price">￥24.90</div>
-                <div class="cheapPrice">省￥10.10</div>
-              </li>
-              <li class="good">
-                <div class="image">
-                  <img src="./three_in_one.jpg" alt="">
-                </div>
-                <div class="price">￥24.90</div>
-                <div class="cheapPrice">省￥10.10</div>
-              </li>
-              <li class="good">
-                <div class="image">
-                  <img src="./three_in_one.jpg" alt="">
-                </div>
-                <div class="price">￥24.90</div>
-                <div class="cheapPrice">省￥10.10</div>
-              </li>
-              <li class="good">
-                <div class="image">
-                  <img src="./three_in_one.jpg" alt="">
-                </div>
-                <div class="price">￥24.90</div>
-                <div class="cheapPrice">省￥10.10</div>
-              </li>
-              <li class="good">
-                <div class="image">
-                  <img src="./three_in_one.jpg" alt="">
-                </div>
-                <div class="price">￥24.90</div>
-                <div class="cheapPrice">省￥10.10</div>
-              </li>
-              <li class="good">
-                <div class="image">
-                  <img src="./three_in_one.jpg" alt="">
-                </div>
-                <div class="price">￥24.90</div>
-                <div class="cheapPrice">省￥10.10</div>
-              </li>
-              <li class="good">
-                <div class="image">
-                  <img src="./three_in_one.jpg" alt="">
-                </div>
-                <div class="price">￥24.90</div>
-                <div class="cheapPrice">省￥10.10</div>
-              </li>
-
             </ul>
           </div>
         </div>
@@ -149,7 +70,7 @@
         <experience></experience>
         <div class="pageLine"></div>
         <!--品牌组件-->
-        <brand></brand>
+        <brand :brandData="brandData"></brand>
         <div class="pageLine"></div>
         <!--公益组件-->
         <publicBenefit></publicBenefit>
@@ -170,12 +91,11 @@
       </div>
 
   </div>
-
-  </div>
 </template>
 
 <script>
   import BScroll from 'better-scroll'
+  import axios from 'axios'
   import turnShow from '../turnShow/turnShow.vue'
   import hot from '../hot/hot.vue'
   import chaopinVideo from '../chaopinVideo/chaopinVideo.vue'
@@ -185,13 +105,11 @@
   import ratings from '../ratings/ratings.vue'
 
   export default {
-    props: {
-      indexdata: Object
-
-    },
+    props: ['indexdata','crazyEverydayData'],
     data(){
       return {
-        imgArr:{}
+        imgArr:[],
+        brandData:{}
       }
     },
 
@@ -205,35 +123,40 @@
       'ratings': ratings
     },
     created () {
-      setTimeout(()=>{
-        if(this.indexdata.datas[0]) {
-          this.imgArr=this.indexdata.datas[0]
-          console.log(this.imgArr)
-        }
-      },2)
 
+      setTimeout(()=>{
+        axios.get('/api1/brand')
+          .then((res) => {
+            this.brandData = res.data.brandData
+            console.log(this.brandData);
+          })
+
+        this.getImagesArr()
+      },200)
+      this._initScroll ()
     },
     methods: {
       _initScroll () {
-        this.firstScroll = new BScroll(this.$refs.firstPage, {
-          click: true
-        })
+        setTimeout(()=>{
+          this.firstScroll = new BScroll(this.$refs.firstPage, {
+            click: true
+          })
+          this.twoScroll = new BScroll(this.$refs.surpriseList, {
+            click: true,
+            scrollX: true
+          })
+        },1000)
+
+      },
+      getImagesArr(){
+        setTimeout(()=>{   //加异步之后this.indexdata才不是undefined，
+          console.log(222,this.crazyEverydayData)
+          this.imgArr = this.indexdata.datas[0].value
+          console.log(11,this.indexdata)
+        },1000)
       }
     },
     computed:{
-//      images(){
-//          const imgArr=[]
-//          if(this.indexdata.datas[0]){
-//            this.indexdata.datas[0].value.forEach((item,index)=>{
-//              imgArr.push(item.image)
-//            })
-//            console.log(imgArr)
-
-//          }
-
-
-
-//      }
     }
   }
 </script>
@@ -242,10 +165,19 @@
 <style lang="stylus" rel="stylesheet/stylus">   //引入stylus样式的固定写法
   @import "../../common/stylus/mixin.styl"    //导入外部样式
   #firstPage
-    margin-bottom 55px
+    box-sizing border-box
+    overflow hidden
+    height 100%
+    padding-top (140/r)
+    padding-bottom (55/r)
+
     .content
+      width 100%
+
+      height (4600/r)
+      margin-bottom (55/r)
       font-size (14/r)
-      margin-top (140/r)
+
       .plan
         .oneBuy
           font-size 0
@@ -261,6 +193,8 @@
           height (90/r)
           ul
             overflow hidden
+            display inline-block
+            height 100%
           &>ul>li
             float left
             width 20%
@@ -310,17 +244,19 @@
 
 
         .surpriseList
-          overflow hidden
+          width 100%
+          box-sizing border-box
+          padding (5/r)
+          height (140/r)
           ul
-
-            overflow hidden
-            width (1176/r)
-          .good
             float left
-            width (98/r)
+            white-space nowrap
+            overflow hidden
+            height  (130/r)
+          .good
+            display inline-block
+            width (92.5/r)
             height (130/r)
-            background url("./default-epet.png")
-            background-size 100% 100%
             .image
               font-size 0
               img

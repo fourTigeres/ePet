@@ -8,19 +8,31 @@
         <router-link to="brand">品牌</router-link>
       </div>
     </div>
-    <router-view></router-view>
+    <router-view :sortsData="sortsData"></router-view>
   </div>
 </template>
 
 <script>
+
   import detail from '../detail/detail.vue'
+  import axios from 'axios'
   import brand from '../brand/brand.vue'
   export default {
     props: {},
     data () {
-      return {}
+      return {
+        sortsData:[]
+      }
     },
     methods: {},
+    created(){
+      axios.get('/api2/sortsData')
+        .then((res) => {
+          this.sortsData = res.data.sortsData.categorys
+//          console.log(555,this.sortsData)
+//          console.log(typeof this.sortsData)
+        })
+    },
     computed: {}
 
   }

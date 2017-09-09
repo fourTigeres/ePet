@@ -1,13 +1,11 @@
 <template>
   <div id="turnShow">
-    <div>
       <mt-swipe :auto="1000" class="swiperWrapper">
-        <mt-swipe-item class="swipeItem" v-if="imgArr.value" v-for="item in imgArr.value">
-          <router-link to="/firstPage"><img :src="`${item.image}`" alt=""></router-link>
+        <mt-swipe-item class="swipeItem" v-if="imgArr" v-for="item in imgArr">
+          <router-link to="/firstPage"><img src="./5.jpg" alt=""></router-link>
         </mt-swipe-item>
+        <!--使用 :src="`${item.image}`"-->
       </mt-swipe>
-    </div>
-
   </div>
 </template>
 
@@ -15,7 +13,7 @@
   export default {
 
     props: {
-      imgArr: Object
+      imgArr: Array
     },
     data () {
       return {}

@@ -1,13 +1,6 @@
 {
-    "msg": "",
-    "code": "succeed",
-    "login_status": 0,
-    "mall_uid": "epet_0",
-    "mall_user": "",
-    "sys_time": 1502423439,
-    "hash": "",
-    "data": {
-        "27": {
+  "data": {
+        "seven": {
             "index": "27",
             "is_show": 1,
             "type": "8",
@@ -402,7 +395,7 @@
                 "target": {}
             }
         },
-        "60": {
+        "six": {
             "index": "60",
             "is_show": 1,
             "type": "2",
@@ -469,13 +462,13 @@
                 }
             ]
         },
-        "73": {
+        "three": {
             "index": "73",
             "is_show": 0,
             "type": "11",
             "is_dynamic": "1",
             "type_name": "猜你想买模板"
         }
-    },
-    "is_dynamic": 1
+    }
+
 }

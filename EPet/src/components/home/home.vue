@@ -29,8 +29,8 @@
             </a>
           </div>
         </div>
-        <div class="findNav">
-          <ul ref="scrollWrapper">
+        <div class="findNav" ref="scrollWrapper">
+          <ul>
             <li  v-if="indexdata.menus" v-for="(item,index) in indexdata.menus">
               <router-link :to="`${titleArr[index]}`" >
                 <!--用以下两种拼串方式都可以-->
@@ -45,7 +45,10 @@
         </div>
       </div>
     </div>
-    <router-view :indexdata="indexdata"></router-view>
+    <router-view :crazyEverydayData="crazyEverydayData"
+                   :indexdata="indexdata">
+
+    </router-view>
   </div>
 
 </template>
@@ -68,11 +71,25 @@
     },
     data () {
       return {
+        crazyEverydayData:{},
         titleArr:["firstPage","catfood","special","can","chaopinVideo","classroom"]
       }
     },
     created () {
+      setTimeout(()=>{
+        axios.get('/api1/everyData')
+          .then((res) => {
+            this.crazyEverydayData = res.data.everydayData
+          })
 
+
+      },500)
+
+
+
+        setTimeout(()=>{
+          this._initScroll ()
+        },1000)
     },
     methods: {
       _initScroll () {
@@ -84,9 +101,6 @@
 
     },
     computed: {
-      menus(){
-        return this.indexdata.menus||{}
-      }
     },
     components:{
       'firstPage': firstPage,
@@ -103,7 +117,7 @@
   @import "../../common/stylus/mixin.styl"    //导入外部样式
   #home
     width 100%
-    display inline-block
+    height 100%
     #header
       width 100%
       position fixed

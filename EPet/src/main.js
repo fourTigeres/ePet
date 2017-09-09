@@ -7,6 +7,7 @@ import  './common/stylus/index.styl'
 import MintUI from 'mint-ui'
 import { Swipe, SwipeItem, Button} from 'mint-ui';
 import 'mint-ui/lib/style.css'
+import './mock/mockServer'   //引入mockServer.js文件
 import '../static/css/reset.css'
 import BScroll from 'better-scroll'
 
